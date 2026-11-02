@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Book Direct · Lunan Boutique Hotel &amp; Hostel</title>
+<meta name="theme-color" content="#445840">
+<meta property="og:title" content="Book Direct · Lunan Boutique Hotel &amp; Hostel">
+<meta property="og:description" content="Self check-in, no reception. Book your stay directly in about 3 minutes.">
+<meta property="og:type" content="website">
+<!-- After deploying, replace with the full URL, e.g. https://YOUR-SITE.netlify.app/img/outdoor.jpg -->
+<meta property="og:image" content="img/outdoor.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<script>tailwind.config={theme:{extend:{colors:{sage:{50:'#F1F4EF',100:'#E2E9DE',200:'#C6D3BF',300:'#A4B89C',500:'#6B8564',600:'#566E50',700:'#445840',800:'#33432F'},cream:'#FAF7F0',sand:'#C9B68A',gold:'#A8895A',slate:'#2E3834'},fontFamily:{display:['Fraunces','Georgia','serif']}}}}</script>
+<style>
+html,body{height:100%}
+body{font-family:'Figtree',system-ui,sans-serif;background:#FAF7F0;color:#2E3834}
+.step{animation:in .35s ease both}
+@keyframes in{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+.q{font-family:Fraunces,Georgia,serif;font-size:clamp(1.7rem,6vw,2.4rem);line-height:1.15;color:#33432F;font-weight:500}
+.hint{color:#6B756F;margin-top:10px;font-size:15px;line-height:1.5}
+.dt{background:#fff;border:1.5px solid #C6D3BF;border-radius:14px;padding:14px;font-size:17px;width:100%;margin-top:6px;font-weight:400}
+.dt:focus{outline:0;border-color:#445840;box-shadow:0 0 0 4px rgba(107,133,100,.2)}
+.dt.bad{border-color:#B4533F}
+.lb{display:block;font-size:14px;font-weight:600;margin-top:16px}
+.msg{color:#B4533F;font-size:14px;margin-top:12px;min-height:20px}
+.card{background:#fff;border:1.5px solid #E1DFD3;border-radius:18px;transition:.15s}
+.room{cursor:pointer;text-align:left;overflow:hidden}
+.room:hover:not(:disabled){border-color:#6B8564}
+.room.sel{border-color:#445840;box-shadow:0 0 0 3px rgba(86,110,80,.2);background:#F1F4EF}
+.room:disabled{opacity:.45;cursor:not-allowed}
+.bdg{display:inline-block;font-size:12px;font-weight:600;padding:3px 9px;border-radius:99px;background:#E2E9DE;color:#33432F}
+.bdg.k{background:#F3EAD2;color:#7A5F34}.bdg.n{background:#ECECE6;color:#555}.bdg.f{background:#33432F;color:#fff}.bdg.d{background:#F3EAD2;color:#7A5F34}
+.sb{width:52px;height:52px;border-radius:14px;border:1.5px solid #A4B89C;background:#fff;font-size:24px;color:#445840}
+.sb.s{width:42px;height:42px;font-size:20px}
+.sb:disabled{opacity:.35}
+.sg{border:1.5px solid #C6D3BF;border-radius:14px;padding:12px 20px;background:#fff;font-weight:600}
+.sg.sel{background:#445840;color:#fff;border-color:#445840}
+.btn{background:#445840;color:#fff;font-weight:600;border-radius:14px;padding:14px 26px;font-size:17px}
+.btn:hover{background:#33432F}.btn:disabled{opacity:.5}
+.ghost{width:48px;height:48px;border-radius:14px;border:1.5px solid #C6D3BF;background:#fff;color:#445840;font-size:20px}
+.chk{width:26px;height:26px;flex:none;accent-color:#445840}
+input[type=file]::file-selector-button{background:#566E50;color:#fff;border:0;border-radius:10px;padding:12px 16px;margin-right:12px;font-weight:600}
+.warn{background:#F6EFDD;border:1.5px solid #C9B68A;border-radius:16px;padding:16px}
+#sig{touch-action:none;background:#fff;border:1.5px dashed #A4B89C;border-radius:14px;display:block}
+#rm[hidden]{display:none}
+#rmG img{user-select:none;-webkit-user-drag:none}
+:focus-visible{outline:3px solid #A8895A;outline-offset:2px}
+@media (prefers-reduced-motion:reduce){.step{animation:none}}
+#senList{counter-reset:s}.sn::before{counter-increment:s;content:"Cardholder " counter(s)}
+</style>
+</head>
+<body>
+<div class="fixed top-0 inset-x-0 h-1.5 bg-sage-100 z-40"><div id="prog" class="h-full bg-sage-600 transition-all duration-500" style="width:0"></div></div>
+<main class="min-h-full flex flex-col" style="padding:28px 22px calc(110px + env(safe-area-inset-bottom,0px))">
+<div class="w-full max-w-xl mx-auto my-auto">
+<form id="f" novalidate onsubmit="return false">
+<input type="text" id="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0">
+
+<section class="step" id="s-welcome">
+  <img src="img/outdoor.jpg" alt="Lunan Boutique Hotel &amp; Hostel at sunset" width="1400" height="933" class="w-full rounded-3xl mb-6 object-cover" style="aspect-ratio:3/2">
+  <p class="font-display text-xl text-gold">Lunan</p>
+  <h1 class="q mt-4" style="font-size:clamp(2.1rem,8vw,3.4rem)">Book your stay directly with Lunan Boutique Hotel &amp; Hostel.</h1>
+  <p class="hint">Self check-in, no reception. Seven short steps, about 3 minutes.</p>
+  <button type="button" class="btn mt-8" onclick="next()">Start booking</button>
+  <div class="help-box card p-4 mt-8"></div>
+  <p class="hint"><a id="lnkPhotos" class="underline hidden" target="_blank" rel="noopener">Photo gallery</a> <a id="lnkVideo" class="underline hidden ml-3" target="_blank" rel="noopener">Video tour</a></p>
+</section>
+
+<section class="step" id="s-stay" hidden>
+  <h2 class="q">When are you staying, and how many?</h2>
+  <div class="grid grid-cols-2 gap-3">
+    <label class="lb">Check-in<input type="date" id="ci" class="dt"></label>
+    <label class="lb">Check-out<input type="date" id="co" class="dt"></label>
+  </div>
+  <p id="nights" class="mt-4 inline-block bg-sage-100 text-sage-800 font-semibold rounded-full px-4 py-1.5 text-sm">Pick your dates</p>
+  <div class="flex items-center justify-between gap-3 mt-5">
+    <span><b>Guests</b><br><span class="text-sm text-slate/60">Adults and children aged 8+. Up to 6.</span></span>
+    <span class="flex items-center gap-3"><button type="button" class="sb" id="pm" aria-label="Fewer guests">−</button><b id="paxN" class="font-display text-4xl w-10 text-center text-sage-700" aria-live="polite">2</b><button type="button" class="sb" id="pp" aria-label="More guests">+</button></span>
+  </div>
+  <div class="flex items-center justify-between gap-3 mt-4"><span><b>Free children</b><br><span class="text-sm text-slate/60">Age 7 and under, sharing existing bedding. Not counted as guests. Max 2.</span></span><span class="flex items-center gap-2"><button type="button" class="sb s" id="km" aria-label="Fewer children">−</button><b id="kidN" class="w-6 text-center text-xl">0</b><button type="button" class="sb s" id="kp" aria-label="More children">+</button></span></div>
+  <label id="kidBox" class="lb" hidden>Children's ages<input id="kidAges" class="dt" placeholder="e.g. 4, 7"></label>
+  <p class="msg"></p>
+</section>
+
+<section class="step" id="s-room" hidden>
+  <h2 class="q">Pick your room(s)</h2>
+  <p class="hint">Rates per night, before VAT. Need more than one room? Add as many as you need and we hold them together. Standard, Deluxe and Studio rates cover 1–2 guests. <span id="availMsg" class="text-gold font-semibold"></span></p>
+  <div id="rooms" class="grid sm:grid-cols-2 gap-3 mt-5"></div><p id="capMsg" class="hint font-semibold" aria-live="polite"></p><p class="msg"></p>
+  <div class="warn text-[15px] leading-relaxed">
+    <p class="font-semibold text-gold">Before you book</p>
+    <p class="mt-1" id="stairs"></p>
+    <ul class="mt-2 space-y-1 list-disc pl-5"><li>Check-in 2:00 PM · check-out 10:00 AM.</li><li>Self check-in, no reception. Directions and your door code are sent only after payment is verified.</li><li>1 free car space per room. Motorcycles don't count toward that limit.</li><li>No smoking indoors (Executive Order No. 26). ₱3,000 penalty and deep-cleaning apply.</li><li>Bookings are non-refundable. Reschedule at least 7 days before check-in, no fee.</li></ul>
+  </div>
+</section>
+
+<section class="step" id="s-extras" hidden>
+  <h2 class="q">Add-ons &amp; timing</h2>
+  <div class="card p-4 mt-5"><div class="flex justify-between items-start gap-3"><span><b>Breakfast</b> · ₱300 per person, per morning<br><span class="text-sm text-slate/70">Choose the mornings and how many people. Must be ordered in advance.</span></span><button type="button" id="bfAll" class="underline text-sm text-sage-700 shrink-0">Select all</button></div><div id="bfList" class="mt-2 divide-y divide-sage-100"></div></div>
+  <div id="addBox" class="card p-4 mt-3 flex justify-between items-center gap-3">
+    <span><b>Additional pax</b> · ₱600 per person, per night<br><span id="addNote" class="text-sm text-slate/70"></span></span>
+    <span class="flex items-center gap-2 shrink-0"><button type="button" class="sb s" id="am" aria-label="Fewer additional guests">−</button><b id="addN" class="text-xl w-5 text-center">0</b><button type="button" class="sb s" id="ap" aria-label="More additional guests">+</button></span>
+  </div>
+  <label id="floorBox" class="lb" hidden>Preferred floor <span class="font-normal text-slate/60">(subject to availability)</span><select id="floorPref" class="dt"><option value="">No preference</option><option>1st floor</option><option>2nd floor</option></select></label>
+  <p class="hint mt-5">Early check-in and late check-out are <b id="hrRate"></b> per hour for all your rooms combined. Early check-in is available from 12:00 PM. Late check-out is available until 12:00 PM only. Subject to availability.</p>
+  <div class="grid sm:grid-cols-2 gap-x-3">
+    <label class="lb">Early check-in<select id="early" class="dt"></select></label>
+    <label class="lb">Late check-out<select id="late" class="dt"></select></label>
+  </div>
+  <label class="lb">Estimated arrival time<select id="arrive" class="dt"></select></label>
+  <p class="hint mt-1 text-sm">Your door code is sent at 1:00 PM on check-in day (or right after payment for same-day bookings).</p>
+  <p class="msg"></p>
+</section>
+
+<section class="step" id="s-guest" hidden>
+  <h2 class="q">Who's the reservation for?</h2>
+  <label class="lb">Full name<input id="name" class="dt" autocomplete="name" placeholder="Juan Dela Cruz"></label>
+  <label class="lb">Contact number (mobile or Viber)<input id="phone" type="tel" inputmode="tel" class="dt" autocomplete="tel" placeholder="0917 123 4567"></label>
+  <label class="lb">Email address<input id="email" type="email" class="dt" autocomplete="email" placeholder="you@email.com"></label>
+  <label class="lb">Nationality<select id="nat" class="dt"><option value="ph">Filipino</option><option value="x">Foreign national</option></select></label>
+  <div id="ppBox" hidden><label class="lb">Nationality (country)<input id="natN" class="dt"></label><label class="lb">Passport number<input id="ppn" class="dt uppercase"></label><label class="lb">Passport country of issue<input id="ppc" class="dt"></label></div>
+  <p class="hint mt-2 text-sm">Required by law: lodging establishments must keep a guest register.</p>
+  <label class="lb">Facebook Messenger link or handle <span class="font-normal text-slate/60">(optional)</span><input id="fb" class="dt" placeholder="m.me/yourname or @yourname"></label>
+  <p class="hint mt-2">Optional. Share it to receive your door code on Messenger. Otherwise we'll send it to your email and mobile.</p>
+  <label class="lb">Special requests <span class="font-normal text-slate/60">(optional)</span><textarea id="notes" rows="3" class="dt" placeholder="Celebrations, accessibility needs, anything we should know"></textarea></label>
+  <p class="msg"></p>
+</section>
+
+<section class="step" id="s-vehicle" hidden>
+  <h2 class="q">Bringing a vehicle?</h2>
+  <div class="flex gap-3 mt-5" data-k="veh"><button type="button" class="sg" data-v="1">Yes</button><button type="button" class="sg" data-v="0">No</button></div>
+  <div id="vBox" hidden>
+    <div class="grid sm:grid-cols-2 gap-x-3">
+      <label class="lb">Vehicle type<select id="vtype" class="dt"><option value="">Choose…</option><option>Car / Sedan</option><option>SUV / Van</option><option>Motorcycle</option><option>Other</option></select></label>
+      <label class="lb">Plate number<input id="plate" class="dt uppercase" placeholder="ABC 1234"></label>
+    </div>
+    <p class="lb">Do you need parking?</p>
+    <div class="flex gap-3 mt-2" data-k="park"><button type="button" class="sg sel" data-v="1">Yes</button><button type="button" class="sg" data-v="0">No</button></div>
+    <label id="valetBox" class="card flex gap-4 items-start p-4 mt-4 cursor-pointer"><input type="checkbox" id="valet" class="chk mt-1"><span><b>Valet parking</b><br><span class="text-sm text-slate/70" id="valetNote"></span></span></label>
+    <p class="hint text-sm">1 complimentary car space per room, nose-in. Motorcycles are excluded from that limit.</p>
+  </div><p class="msg"></p>
+</section>
+
+<section class="step" id="s-billing" hidden>
+  <h2 class="q">Discounts &amp; receipt</h2>
+  <label class="lb" for="cp">Coupon or voucher <span class="font-normal text-slate/50">(optional)</span></label>
+  <div class="flex gap-3"><input id="cp" class="dt uppercase" placeholder="Enter code"><button type="button" class="btn shrink-0" id="cpGo" style="padding:12px 20px;margin-top:6px">Apply</button></div>
+  <p id="cpMsg" class="mt-2 text-[15px] font-semibold min-h-[22px]" aria-live="polite"></p>
+  <label class="card flex gap-4 items-center p-4 mt-3 cursor-pointer"><input type="checkbox" id="or" class="chk"><span><b>Request Official Receipt (OR) (+12% VAT)</b><br><span class="text-sm text-slate/70">VAT is added only if you tick this.</span></span></label>
+  <div id="orBox" hidden>
+    <label class="lb">Company name<input id="co_name" class="dt" autocomplete="organization"></label>
+    <label class="lb">Company address<input id="co_addr" class="dt" autocomplete="street-address"></label>
+    <label class="lb">TIN<input id="tin" class="dt" inputmode="numeric" placeholder="123-456-789-000"></label>
+  </div>
+  <label class="card flex gap-4 items-center p-4 mt-3 cursor-pointer"><input type="checkbox" id="sbox" class="chk"><span><b>Apply Senior Citizen / PWD discount</b><br><span class="text-sm text-slate/70">Tick if any staying guest has a Senior Citizen or PWD ID.</span></span></label>
+  <div id="senBox" hidden>
+    <div class="flex justify-between items-center gap-3 mt-4"><p class="font-semibold">Cardholders: <span id="senCnt"></span></p><button type="button" class="btn shrink-0" id="senAdd" style="padding:10px 16px;margin:0">+ Add cardholder</button></div>
+    <div id="senList" class="space-y-3 mt-3"></div>
+    <p class="hint text-sm">Valid PH Senior Citizen or PWD ID must be presented upon check-in. Discount applies strictly to the cardholder's individual share of the room bill (room total ÷ number of guests). The 20% discount and VAT exemption cover each cardholder's share only. Cardholder must be one of the staying guests.</p>
+  </div>
+  <div class="card p-5 mt-4"><div class="bd"></div></div><p class="msg"></p>
+</section>
+
+<section class="step" id="s-agree" hidden>
+  <h2 class="q">ID &amp; house rules</h2>
+  <label class="lb">Government-issued ID<input type="file" id="gid" accept="image/*" class="mt-2 block w-full font-normal"></label>
+  <p class="hint mt-1 text-sm">A clear photo of a valid ID. We verify you before sending your door code. Stored securely, never shared publicly, and deleted after the legal retention period.</p>
+  <ul class="mt-5 space-y-2 text-[15px]">
+    <li class="card p-3"><b>No smoking</b> inside rooms and enclosed areas. Indoor smoking is illegal under Executive Order No. 26 (nationwide smoking ban). Violations are charged a ₱3,000 penalty, including deep cleaning.</li>
+    <li class="card p-3"><b>No pets</b> allowed: ₱3,000 penalty</li>
+    <li class="card p-3"><b>Lost or damaged key card:</b> ₱1,000</li>
+    <li class="card p-3"><b>Quiet hours</b> 10:00 PM – 8:00 AM</li>
+    <li class="card p-3"><b>No visitors</b> between 8:00 PM and 10:00 AM</li>
+    <li class="card p-3"><b>Check-in</b> 2:00 PM · <b>check-out</b> 10:00 AM</li>
+    <li class="card p-3"><b>No refunds.</b> Bookings are non-refundable and no-shows forfeit payment. You may reschedule at least 7 days before check-in, with no fee, by contacting us.</li>
+  </ul>
+  <label class="flex gap-3 items-start mt-5 cursor-pointer"><input type="checkbox" id="agree" class="chk"><span class="leading-relaxed">I have read and agree to the house rules and penalties above.</span></label>
+  <label class="flex gap-3 items-start mt-4 cursor-pointer"><input type="checkbox" id="policy" class="chk"><span class="leading-relaxed">I understand my booking is non-refundable and can only be rescheduled at least 7 days before check-in (no fee), and that no-shows are non-refundable.</span></label>
+  <label class="flex gap-3 items-start mt-4 cursor-pointer"><input type="checkbox" id="privacy" class="chk"><span class="leading-relaxed">I consent to Lunan collecting and using my personal data, ID and signature to process my booking, as described in the <a href="#" id="pvLink" class="underline">privacy notice</a>.</span></label>
+  <div id="pvText" hidden class="text-sm leading-relaxed bg-sage-50 rounded-2xl p-4 mt-2"><b>Privacy notice.</b> Lunan collects your name, contact details, home address, nationality, ID photo and number, passport details (foreign guests), signature, vehicle details, payment proof, and Senior/PWD ID details if you claim that discount. We use them to verify and process your booking, apply statutory discounts, keep the guest register required by local government and DOT rules, run self check-in, and keep security and tax records. Your IDs and proofs are stored securely, are never shared publicly, and are seen only by staff who need them. ID photos are deleted after the legal retention period (generally 1–2 years for tax and audit purposes). Under the Data Privacy Act of 2012 (RA 10173) you may ask to access, correct or delete your data by emailing lunanbyski@gmail.com, or complain to the National Privacy Commission.</div>
+  <div class="flex justify-between items-center mt-5"><p class="font-semibold">Sign here</p><button type="button" id="sigClr" class="underline text-sm text-sage-700">Clear</button></div>
+  <canvas id="sig" class="mt-2" aria-label="Signature pad"></canvas><p class="msg"></p>
+</section>
+
+<section class="step" id="s-pay" hidden>
+  <h2 class="q">Pay, then upload your proof</h2>
+  <div id="holdBar" class="warn mt-4 text-[15px]" aria-live="polite"></div>
+  <div class="card p-5 mt-5"><div class="bd"></div></div>
+  <div class="warn mt-3 text-[15px]" id="depNote"></div>
+  <div class="rounded-2xl bg-sage-700 text-cream p-5 mt-3 text-[15px] flex gap-4 items-center">
+    <div class="w-28 h-28 shrink-0 rounded-xl bg-cream text-slate grid place-items-center text-xs text-center p-1 overflow-hidden" id="qr">InstaPay QR here</div>
+    <div><p class="font-semibold">Scan the InstaPay QR</p><p class="mt-1 leading-relaxed text-sage-100">Pay with GCash, Maya, BPI or any bank app that supports InstaPay.</p></div>
+  </div>
+  <label class="lb">Proof of payment<input type="file" id="rcpt" accept="image/*" class="mt-2 block w-full font-normal"></label>
+  <div class="help-box card p-4 mt-5"></div>
+  <p class="msg"></p>
+</section>
+
+<section class="step" id="s-done" hidden>
+  <div class="w-14 h-14 rounded-full bg-sage-600 text-white grid place-items-center text-3xl">✓</div>
+  <h2 class="q mt-5">Booking received, <span id="dn"></span>.</h2>
+  <p class="hint">Reference <b id="ref"></b>. Status: <b>awaiting payment verification</b>.</p>
+  <div class="card p-5 mt-5"><div class="bd"></div></div>
+  <div class="help-box card p-4 mt-4"></div>
+  <div class="warn mt-4 text-[15px] leading-relaxed"><b class="text-gold">Your door code is locked.</b> Directions, parking instructions and your digital door code are sent to your email, mobile and Messenger (if provided) only after we verify your payment.</div>
+</section>
+
+</form>
+</div>
+</main>
+
+<div id="rm" class="fixed inset-0 z-50 flex items-end sm:items-center justify-center" hidden role="dialog" aria-modal="true" aria-labelledby="rmT">
+  <div id="rmBg" class="absolute inset-0 bg-slate/60"></div>
+  <div class="relative bg-cream w-full sm:max-w-2xl rounded-t-3xl sm:rounded-3xl shadow-2xl flex flex-col overflow-hidden" style="max-height:92vh;max-height:92dvh">
+    <button type="button" id="rmClose" class="ghost absolute top-3 right-3 z-10" style="width:40px;height:40px;font-size:18px" aria-label="Close">✕</button>
+    <div class="overflow-y-auto flex-1"><div id="rmG"></div><div id="rmInfo" class="p-5"></div></div>
+    <div id="rmFoot" class="border-t border-sage-100 bg-cream flex items-center gap-3" style="padding:12px 18px calc(12px + env(safe-area-inset-bottom,0px))"></div>
+  </div>
+</div>
+
+<nav id="bar" class="fixed bottom-0 inset-x-0 z-30 bg-cream/95 backdrop-blur border-t border-sage-100 hidden" style="padding:12px 18px calc(12px + env(safe-area-inset-bottom,0px))">
+  <div class="max-w-xl mx-auto flex items-center gap-3">
+    <button type="button" class="ghost" id="back" aria-label="Back">←</button>
+    <div class="min-w-0 flex-1"><p class="text-xs text-slate/60 truncate" id="chipL">Total</p><p class="font-display text-xl text-sage-700 leading-none" id="chipT">₱0.00</p></div>
+    <button type="button" class="btn" id="nx">Continue</button>
+  </div>
+</nav>
+
+<script>
+/* ===== CONFIG ===== */
+const API="https://script.google.com/macros/s/AKfycbyJVMXDqpgGLgW001GaLEWLa69LxyWsdBVKY9B84DdACWHs_1PyOtGu37V2ptXgF0fN/exec";   // paste your Apps Script Web App URL here (ends in /exec). Handles availability, holds, coupons and bookings.
+const BOOKING_ENDPOINT=API,AVAIL_URL=API,HOLD_URL=API,COUPON_URL=API;
+const COUPONS={/* "LUNAN10":{type:"percent",value:10} */};
+const PHOTOS_URL="",VIDEO_URL="",QR_URL="img/pq.jpg";
+const VAT=0.12,BF=300,ADD=600,ADDMAX=2,MAXPAX=30,MAXROOMS=6,SEN_DISC=0.20,VALET_FEE=0,BFMAX=20,KIDMAX=2,HOLD_MIN=10;   // valet is free
+const EARLY_FROM=12,STD_IN=14,STD_OUT=10,LATE_TIMES=[11,12];
+/* Per room: imgs = list of photo URLs (first one is the card cover), desc = short description (optional), amen = list of amenities (optional). */
+const ROOMS=[
+ {id:"std",name:"Standard Room",max:2,cap:"1–2 guests",rate:1600,kids:1,hr:200,kit:false,noAdd:true,pick:true,floor:"1st or 2nd floor",img:"",imgs:["img/sr1.jpg","img/sr2.jpg","img/sr3.jpg","img/sr4.jpg"],desc:"A compact, comfortable room with a private attached bathroom. No kitchen, dining or living area.",amen:["Private attached bathroom"]},
+ {id:"dlx",name:"Deluxe Room",max:2,cap:"1–2 guests",rate:1900,kids:1,hr:200,kit:false,pick:true,floor:"1st or 2nd floor",img:"",imgs:["img/dr1.jpg","img/dr2.jpg","img/dr3.jpg","img/dr4.jpg"],desc:"A comfortable room with a private attached bathroom. No kitchen, dining or living area.",amen:["Private attached bathroom"]},
+ {id:"stu",name:"Studio Room",max:2,cap:"1–2 guests",rate:2600,kids:1,hr:200,kit:true,floor:"3rd floor",img:"",imgs:["img/st4.jpg","img/st1.jpg","img/st2.jpg","img/st3.jpg","img/st5.jpg"],desc:"",amen:[]},
+ {id:"s1b",name:"Standard 1 Bedroom Suite",max:4,cap:"Up to 4 guests",rate:3600,kids:2,hr:400,kit:true,floor:"3rd floor",img:"",imgs:["img/fam2.jpg","img/st1.jpg","img/st2.jpg","img/st3.jpg","img/st4.jpg","img/st5.jpg"],desc:"",amen:[]},
+ {id:"d1b",name:"Deluxe 1 Bedroom Suite",max:4,cap:"Up to 4 guests",rate:3900,kids:2,hr:400,kit:true,floor:"4th floor",img:"",imgs:["img/dfs4.jpg","img/dfs1.jpg","img/dfs2.jpg","img/dfs3.jpg"],desc:"One bedroom with a king-size bed, plus a living area, kitchen area and dining area, with a private bathroom.",amen:["1 bedroom, king-size bed","Living area","Kitchen area","Dining area","Private bathroom"]},
+ {id:"sfs",name:"Standard Family Suite",max:6,cap:"Up to 6 guests",rate:4600,kids:2,hr:600,kit:true,floor:"3rd floor",img:"",imgs:["img/fam2.jpg","img/st1.jpg","img/st2.jpg","img/st3.jpg","img/st4.jpg","img/st5.jpg"],desc:"",amen:[]},
+ {id:"dfs",name:"Deluxe Family Suite",max:6,cap:"Up to 6 guests",rate:4900,kids:2,hr:600,kit:true,floor:"4th floor",img:"",imgs:["img/dfs5.jpg","img/dfs1.jpg","img/dfs2.jpg","img/dfs3.jpg","img/dfs4.jpg"],desc:"One bedroom with a king-size bed and two bunk beds, plus a living area, kitchen area and dining area, with a private bathroom.",amen:["1 bedroom, king-size bed","2 bunk beds","Living area","Kitchen area","Dining area","Private bathroom"]}
+];
+const ORDER=["welcome","stay","room","extras","guest","vehicle","billing","agree","pay","done"];
+const $=id=>document.getElementById(id),S={pax:2,kids:0,rooms:[],sen:[],sbox:false,bf:{},addPax:0,early:0,late:0,veh:null,park:true,valet:false,or:false,coupon:null,signed:false,avail:null};
+const peso=n=>"₱"+n.toLocaleString("en-PH",{minimumFractionDigits:2,maximumFractionDigits:2});
+const iso=d=>new Date(d.getTime()-d.getTimezoneOffset()*6e4).toISOString().slice(0,10);
+const plus=(s,n)=>{const d=new Date(s+"T00:00");d.setDate(d.getDate()+n);return iso(d)};
+const hh=h=>((h+11)%12+1)+":00 "+(h>=12?"PM":"AM");
+const cap=()=>S.rooms.reduce((a,r)=>a+r.max,0),kcap=()=>S.rooms.reduce((a,r)=>a+r.kids,0),amax=()=>S.rooms.reduce((a,r)=>a+(r.noAdd?0:ADDMAX),0),guests=()=>S.pax+S.addPax,esc=s=>s.replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;"),isPH=()=>$("nat").value=="ph";
+const feas=ids=>{if(!S.free)return true;const u=new Set();return ids.every(id=>{const f=(S.free[id]||[]).find(x=>!u.has(x));if(f===undefined)return false;u.add(f);return true})};
+const today=iso(new Date());let i=0;
+if(PHOTOS_URL){$("lnkPhotos").href=PHOTOS_URL;$("lnkPhotos").classList.remove("hidden")}
+if(VIDEO_URL){$("lnkVideo").href=VIDEO_URL;$("lnkVideo").classList.remove("hidden")}
+if(QR_URL)$("qr").innerHTML=`<a href="${QR_URL}" target="_blank" rel="noopener" class="block w-full h-full" aria-label="Open QR full size"><img src="${QR_URL}" alt="InstaPay QR" class="w-full h-full object-contain"></a>`;
+$("ci").min=today;$("co").min=plus(today,1);
+
+function calc(){
+ const ci=$("ci").value,co=$("co").value;
+ const n=ci&&co?Math.round((new Date(co+"T00:00")-new Date(ci+"T00:00"))/864e5):0,nights=Math.max(n,0),hr=S.rooms.reduce((a,x)=>a+x.hr,0);
+ const base=S.rooms.reduce((a,x)=>a+x.rate,0)*nights,bfQty=Object.values(S.bf).reduce((a,b)=>a+b,0),bf=BF*bfQty,add=S.addPax*ADD*nights,early=S.early*hr,late=S.late*hr,valet=S.valet&&S.park&&S.veh?VALET_FEE*nights:0;
+ const gross=base+bf+add+early+late+valet;
+ let disc=0;if(S.coupon)disc=Math.min(gross,Math.round((S.coupon.type=="percent"?gross*S.coupon.value/100:S.coupon.value)*100)/100);
+ const g0=gross-disc,nS=S.sbox?S.sen.length:0,gs=guests(),sShare=gs?Math.round(base/gs*nS*100)/100:0,sd=Math.round(sShare*SEN_DISC*100)/100;
+ const sub=g0-sd,vat=S.or?Math.round((g0-sShare)*VAT*100)/100:0,total=sub+vat,same=ci===today;
+ const due=same?total:Math.round(total*50)/100;
+ return{nS,sShare,sd,n,nights,base,bf,bfQty,add,early,late,valet,disc,sub,vat,total,same,due,bal:Math.round((total-due)*100)/100};
+}
+function bd(c){
+ const row=(a,b,x="")=>`<div class="flex justify-between gap-3 py-1.5 ${x}"><span>${a}</span><span class="font-medium text-right">${b}</span></div>`,s=c.nights==1?"":"s";
+ return(ROOMS.filter(r=>S.rooms.some(x=>x.id==r.id)).map(r=>{const q=S.rooms.filter(x=>x.id==r.id).length;return row(`${r.name}${q>1?" × "+q:""} × ${c.nights} night${s}`,peso(r.rate*q*c.nights))}).join(""))
+ +(S.kids?row(`Children 7 & under × ${S.kids}`,"Free"):"")
+ +(c.bfQty?row(`Breakfast × ${c.bfQty} (${Object.keys(S.bf).length} morning${Object.keys(S.bf).length>1?"s":""})`,peso(c.bf)):"")
+ +(S.addPax?row(`Additional pax × ${S.addPax} × ${c.nights} night${s}`,peso(c.add)):"")
+ +(S.early?row(`Early check-in (${S.early} hr)`,peso(c.early)):"")
+ +(S.late?row(`Late check-out (${S.late} hr)`,peso(c.late)):"")
+ +(c.valet?row("Valet parking",peso(c.valet)):"")
+ +(c.disc?row(`Coupon ${S.coupon.code}`,"−"+peso(c.disc),"text-sage-700"):"")
+ +(c.sd?row(`Senior/PWD 20% discount (${c.nS} cardholder${c.nS>1?"s":""}, share ${peso(c.sShare/c.nS)} each)`,"−"+peso(c.sd),"text-sage-700"):"")
+ +row("Subtotal",peso(c.sub),"border-t border-sage-100 mt-1 pt-2.5")
+ +(S.or?row("12% VAT (Official Receipt)"+(c.nS?", senior/PWD share exempt":""),peso(c.vat)):row("<span class='text-slate/60'>No VAT (no Official Receipt)</span>","—"))
+ +row("<b>Grand total due</b>",`<b class="font-display text-2xl text-sage-700">${peso(c.total)}</b>`,"border-t border-dashed border-sand mt-1 pt-3 items-baseline")
+ +row(c.same?"<b>Pay now (same-day: 100%)</b>":"<b>Pay now (50% deposit)</b>",`<b>${peso(c.due)}</b>`)
+ +(c.bal?row("Balance, due before check-in",peso(c.bal)):"");
+}
+function refresh(){
+ if(S.addPax>amax())S.addPax=amax();
+ const c=calc(),R=S.rooms;
+ $("nights").textContent=c.n>0?`${c.n} Night${c.n>1?"s":""}`:($("ci").value&&$("co").value?"Check-out must be after check-in":"Pick your dates");
+ $("paxN").textContent=S.pax;$("addN").textContent=S.addPax;$("kidN").textContent=S.kids;$("km").disabled=S.kids<=0;$("kp").disabled=S.kids>=KIDMAX;$("kidBox").hidden=!S.kids;
+ $("chipT").textContent=peso(c.total);$("chipL").textContent=R.length?`${R.length} room${R.length>1?"s":""}${c.nights?" · "+c.nights+"n":""}`:"Total";
+ document.querySelectorAll(".bd").forEach(e=>e.innerHTML=bd(c));
+ const na=amax()==0,AM=amax();$("am").disabled=na||S.addPax<=0;$("ap").disabled=na||S.addPax>=AM;$("addBox").style.opacity=na?.55:1;
+ $("addNote").textContent=na?"Not available for Standard Rooms. Extra guests are prohibited there.":`Up to ${AM} extra guests, subject to approval.`;
+ $("pm").disabled=S.pax<=1;$("pp").disabled=S.pax>=MAXPAX;
+ $("stairs").innerHTML=R.length?`<b>Your room${R.length>1?"s are":" is"}: ${[...new Set(R.map(x=>x.name+" ("+x.floor+")"))].join(", ")}.</b> Lunan has no elevator: stairs only, with your luggage.`:"<b>Stairs only.</b> Lunan has no elevator, so please plan for stairs, especially with luggage, children or limited mobility.";
+ $("depNote").innerHTML=c.same?"<b>Same-day booking:</b> 100% payment is required now.":"<b>50% deposit</b> reserves your booking. Pay the balance before check-in.";
+ $("valetBox").hidden=!S.park;$("valetNote").textContent="Free for all guests.";
+ $("orBox").hidden=!S.or;$("floorBox").hidden=!R.some(x=>x.pick);
+ $("senBox").hidden=!S.sbox;$("senAdd").disabled=S.sen.length>=guests();$("senCnt").textContent=`${S.sen.length} of ${guests()} guests`;
+}
+function drawRooms(loading){
+ $("rooms").innerHTML=ROOMS.map(r=>{
+  const q=S.rooms.filter(x=>x.id==r.id).length,free=S.avail===null||S.avail.includes(r.id),ok=free&&!loading;
+  const ph=photos(r);
+  return `<div class="card room ${q?"sel":""}" data-info="${r.id}" style="${ok||q?"":"opacity:.5"}">
+  <div class="relative h-36 bg-gradient-to-br from-sage-200 to-sand/60 grid place-items-center text-sage-600/60 text-xs overflow-hidden">${ph[0]?phImg(ph[0],r.name,"w-full h-full object-cover"):"Photo"}<span class="absolute bottom-2 right-2 bg-slate/80 text-white text-xs font-semibold rounded-full px-2.5 py-1">${ph.length>1?ph.length+" photos":"Details"}</span></div>
+  <div class="p-4"><div class="flex justify-between gap-2 items-start"><p class="font-display text-lg text-sage-800 leading-tight">${r.name}</p><p class="text-right shrink-0 font-semibold text-sage-700">₱${r.rate.toLocaleString()}<span class="block text-xs font-normal text-slate/60">per night</span></p></div>
+  <div class="flex flex-wrap gap-1.5 mt-3"><span class="bdg">${r.cap}</span><span class="bdg ${r.kit?"k":"n"}">${r.kit?"With Kitchen":"No Kitchen"}</span>${r.floor?`<span class="bdg f">${r.floor}</span>`:""}</div>
+  <button type="button" class="ri underline text-sm text-sage-700 mt-3" data-id="${r.id}">See details &amp; photos</button>
+  ${!loading&&!free?`<p class="text-xs text-[#B4533F] mt-2">Not available on your dates</p>`:""}
+  <div class="flex items-center justify-between mt-3"><span class="text-sm text-slate/60">${q?q+" selected":"Add to booking"}</span><span class="flex items-center gap-2"><button type="button" class="sb s rm" data-id="${r.id}" ${q?"":"disabled"} aria-label="Remove one ${r.name}">−</button><b class="w-5 text-center">${q}</b><button type="button" class="sb s ra" data-id="${r.id}" ${ok&&S.rooms.length<MAXROOMS&&feas(S.rooms.map(x=>x.id).concat(r.id))?"":"disabled"} aria-label="Add one ${r.name}">+</button></span></div></div></div>`}).join("");
+ document.querySelectorAll(".ra").forEach(b=>b.onclick=()=>{S.rooms.push(ROOMS.find(r=>r.id==b.dataset.id));err();drawRooms();refresh()});
+ document.querySelectorAll(".rm").forEach(b=>b.onclick=()=>{const k=S.rooms.map(x=>x.id).lastIndexOf(b.dataset.id);if(k>=0)S.rooms.splice(k,1);err();drawRooms();refresh()});
+ if(!$("rm").hidden)drawFoot();$("capMsg").textContent=S.rooms.length?`${S.rooms.length} room${S.rooms.length>1?"s":""} selected, fits ${cap()} of your ${S.pax} guest${S.pax>1?"s":""}.`:`Choose one or more rooms for your ${S.pax} guest${S.pax>1?"s":""}.`;
+}
+/* Room details modal */
+const photos=r=>r.imgs&&r.imgs.length?r.imgs:(r.img?[r.img]:[]);
+const phImg=(u,a,c)=>`<img src="${esc(u)}" alt="${esc(a)}" class="${c}" loading="lazy">`;
+const M={r:null,k:0};
+function drawG(){
+ const r=M.r,ph=photos(r),n=ph.length,k=M.k;
+ $("rmG").innerHTML=`<div class="relative bg-gradient-to-br from-sage-200 to-sand/60 grid place-items-center text-sage-600/60 text-sm overflow-hidden aspect-[4/3] sm:aspect-video">${n?phImg(ph[k],`${r.name}, photo ${k+1} of ${n}`,"w-full h-full object-cover"):"Photos coming soon"}${n>1?`<button type="button" class="ghost rmNav absolute left-3 top-1/2 -translate-y-1/2" data-d="-1" aria-label="Previous photo" style="width:42px;height:42px;font-size:24px">‹</button><button type="button" class="ghost rmNav absolute right-3 top-1/2 -translate-y-1/2" data-d="1" aria-label="Next photo" style="width:42px;height:42px;font-size:24px">›</button><span class="absolute bottom-3 left-3 bg-slate/80 text-white text-xs font-semibold rounded-full px-2.5 py-1">${k+1} / ${n}</span>`:""}</div>${n>1?`<div class="flex gap-2 overflow-x-auto px-5 pt-3">${ph.map((u,j)=>`<button type="button" class="rmTh shrink-0 w-16 h-12 rounded-lg overflow-hidden border-2 ${j==k?"border-sage-700":"border-transparent opacity-70"}" data-k="${j}" aria-label="Show photo ${j+1}">${phImg(u,"","w-full h-full object-cover")}</button>`).join("")}</div>`:""}`;
+}
+function drawInfo(){
+ const r=M.r,row=(a,b)=>`<div class="flex justify-between gap-4 py-2.5 text-[15px]"><span class="text-slate/70">${a}</span><span class="font-semibold text-right">${b}</span></div>`;
+ $("rmInfo").innerHTML=`<div class="flex justify-between gap-3 items-start pr-10"><h3 id="rmT" class="font-display text-2xl text-sage-800 leading-tight">${r.name}</h3></div>
+ <p class="mt-1 font-semibold text-sage-700">₱${r.rate.toLocaleString()} <span class="text-sm font-normal text-slate/60">per night, before VAT</span></p>
+ <div class="flex flex-wrap gap-1.5 mt-3"><span class="bdg">${r.cap}</span><span class="bdg ${r.kit?"k":"n"}">${r.kit?"With Kitchen":"No Kitchen"}</span>${r.floor?`<span class="bdg f">${r.floor}</span>`:""}</div>
+ ${r.desc?`<p class="mt-4 leading-relaxed">${r.desc}</p>`:""}
+ ${r.amen&&r.amen.length?`<p class="font-semibold mt-5">What's included</p><ul class="mt-2 grid grid-cols-2 gap-x-4 gap-y-1.5 text-[15px]">${r.amen.map(a=>`<li class="flex gap-2"><span class="text-sage-600">✓</span>${a}</li>`).join("")}</ul>`:""}
+ <p class="font-semibold mt-5">Room details</p>
+ <div class="divide-y divide-sage-100 mt-1">${row("Sleeps",r.cap)}${row("Kitchen",r.kit?"Yes":"No")}${row("Floor",r.floor||"")}${row("Free children (7 &amp; under)","Up to "+r.kids)}${row("Extra guests",r.noAdd?"Not allowed":`Up to ${ADDMAX} at ₱${ADD}/night`)}${row("Early check-in / late check-out",`₱${r.hr} per hour`)}${row("Access","Stairs only, no elevator")}</div>
+ <p class="hint text-sm">Check-in 2:00 PM · check-out 10:00 AM. 1 free car space per room.</p>`;
+}
+function drawFoot(){
+ const r=M.r,q=S.rooms.filter(x=>x.id==r.id).length,free=S.avail===null||S.avail.includes(r.id),can=free&&S.rooms.length<MAXROOMS&&feas(S.rooms.map(x=>x.id).concat(r.id));
+ $("rmFoot").innerHTML=`<div class="min-w-0 flex-1"><p class="text-sm font-semibold">${q?q+" selected":"Add to booking"}</p><p class="text-xs ${free?"text-slate/60":"text-[#B4533F]"}">${!free?"Not available on your dates":S.rooms.length>=MAXROOMS?"Room limit reached":"₱"+r.rate.toLocaleString()+" per night"}</p></div><span class="flex items-center gap-2"><button type="button" class="sb s" id="mRm" ${q?"":"disabled"} aria-label="Remove one ${esc(r.name)}">−</button><b class="w-5 text-center">${q}</b><button type="button" class="sb s" id="mAdd" ${can?"":"disabled"} aria-label="Add one ${esc(r.name)}">+</button></span><button type="button" class="btn" id="mDone" style="padding:12px 20px">Done</button>`;
+}
+function openRoom(id){M.r=ROOMS.find(r=>r.id==id);M.k=0;drawG();drawInfo();drawFoot();$("rm").hidden=false;document.body.style.overflow="hidden";$("rm").querySelector(".overflow-y-auto").scrollTop=0;$("rmClose").focus()}
+function closeRoom(){const id=M.r&&M.r.id;$("rm").hidden=true;document.body.style.overflow="";const b=id&&document.querySelector(`.ri[data-id="${id}"]`);if(b)b.focus({preventScroll:true})}
+function step(d){const n=photos(M.r).length;if(n<2)return;M.k=(M.k+d+n)%n;drawG()}
+$("rooms").addEventListener("click",e=>{if(e.target.closest(".sb"))return;const c=e.target.closest("[data-info]");if(c)openRoom(c.dataset.info)});
+$("rm").addEventListener("click",e=>{
+ const t=e.target;
+ if(t.id=="rmBg"||t.closest("#rmClose")||t.closest("#mDone"))return closeRoom();
+ const nv=t.closest(".rmNav"),th=t.closest(".rmTh");
+ if(nv)return step(+nv.dataset.d);
+ if(th){M.k=+th.dataset.k;return drawG()}
+ if(t.closest("#mAdd")){S.rooms.push(M.r)}
+ else if(t.closest("#mRm")){const k=S.rooms.map(x=>x.id).lastIndexOf(M.r.id);if(k>=0)S.rooms.splice(k,1)}
+ else return;
+ err();drawRooms();refresh();drawFoot();
+});
+let tx=null;
+$("rmG").addEventListener("touchstart",e=>{tx=e.touches[0].clientX},{passive:true});
+$("rmG").addEventListener("touchend",e=>{if(tx===null)return;const d=e.changedTouches[0].clientX-tx;tx=null;if(Math.abs(d)>40)step(d<0?1:-1)},{passive:true});
+document.addEventListener("keydown",e=>{
+ if($("rm").hidden)return;
+ if(e.key=="Escape")closeRoom();
+ else if(e.key=="ArrowLeft")step(-1);
+ else if(e.key=="ArrowRight")step(1);
+ else if(e.key=="Tab"){const f=[...$("rm").querySelectorAll("button:not(:disabled)")];if(!f.length)return;const a=f[0],z=f[f.length-1];if(e.shiftKey&&document.activeElement==a){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement==z){e.preventDefault();a.focus()}}
+});
+async function loadAvail(){
+  S.avail = null;
+  $("availMsg").textContent = "";
+  if (!AVAIL_URL) return drawRooms();
+  
+  $("availMsg").textContent = "Checking availability…";
+  drawRooms(true);
+  
+  try {
+    const res = await fetch(`${AVAIL_URL}?action=avail&checkin=${$("ci").value}&checkout=${$("co").value}&pax=${S.pax}`);
+    const json = await res.json();
+    
+    // Google Apps Script returns: { available: ["std", "dlx", ...], free: {...} }
+    if (json && Array.isArray(json.available)) {
+      S.avail = json.available;
+    } else if (Array.isArray(json)) {
+      S.avail = json;
+    } else {
+      // Fallback: show all room IDs from ROOMS if backend response shape is unexpected
+      S.avail = ROOMS.map(r => r.id);
+    }
+    $("availMsg").textContent = "";
+  } catch (err) {
+    console.error("Availability Fetch Error:", err);
+    // If backend fetch fails, fallback to allowing all rooms instead of locking the UI
+    S.avail = ROOMS.map(r => r.id);
+    $("availMsg").textContent = "";
+  }
+  
+  if (S.room && S.avail && !S.avail.includes(S.room.id)) S.room = null;
+  drawRooms();
+  refresh();
+}
+function fillTimes(){
+ const hr=S.rooms.reduce((a,x)=>a+x.hr,0);$("hrRate").textContent="₱"+hr;
+ const e=[`<option value="0">Standard (${hh(STD_IN)})</option>`],l=[`<option value="0">Standard (${hh(STD_OUT)})</option>`];
+ for(let t=STD_IN-1;t>=EARLY_FROM;t--)e.push(`<option value="${STD_IN-t}">${hh(t)} · ${STD_IN-t} hr · ${peso((STD_IN-t)*hr)}</option>`);
+ LATE_TIMES.forEach(t=>l.push(`<option value="${t-STD_OUT}">${hh(t)} · ${t-STD_OUT} hr · ${peso((t-STD_OUT)*hr)}</option>`));
+ $("early").innerHTML=e.join("");$("late").innerHTML=l.join("");$("early").value=S.early;$("late").value=S.late;
+ const cur=$("arrive").value;$("arrive").innerHTML='<option value="">Choose…</option>'+[12,13,14,15,16,17,18,19,20,21,22,23].map(h=>`<option>${hh(h)}</option>`).join("")+"<option>Later than 11:00 PM</option>";$("arrive").value=cur;
+}
+function drawBf(){
+ const ci=$("ci").value,n=calc().nights,days=[];for(let k=1;k<=n;k++)days.push(plus(ci,k));
+ Object.keys(S.bf).forEach(d=>{if(!days.includes(d))delete S.bf[d]});
+ $("bfList").innerHTML=days.map(d=>{const q=S.bf[d],on=q!==undefined,lab=new Date(d+"T00:00").toLocaleDateString("en-PH",{weekday:"short",month:"short",day:"numeric"});
+  return `<div class="flex items-center justify-between gap-3 py-3"><label class="flex items-center gap-3 cursor-pointer"><input type="checkbox" class="chk bfc" data-d="${d}" ${on?"checked":""}><span>${lab} morning</span></label><span class="flex items-center gap-2 ${on?"":"opacity-30 pointer-events-none"}"><button type="button" class="sb s bfm" data-d="${d}" ${on&&q>1?"":"disabled"} aria-label="Fewer people">−</button><b class="w-7 text-center">${on?q:0}</b><button type="button" class="sb s bfp" data-d="${d}" ${on&&q<BFMAX?"":"disabled"} aria-label="More people">+</button></span></div>`}).join("");
+}
+$("bfList").addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;const d=b.dataset.d;S.bf[d]+=b.classList.contains("bfp")?1:-1;drawBf();refresh()});
+$("bfList").addEventListener("change",e=>{const d=e.target.dataset.d;if(e.target.checked)S.bf[d]=S.pax;else delete S.bf[d];drawBf();refresh()});
+$("bfAll").onclick=()=>{document.querySelectorAll(".bfc").forEach(c=>{if(!(c.dataset.d in S.bf))S.bf[c.dataset.d]=S.pax});drawBf();refresh()};
+/* Signature */
+const cv=$("sig"),cx=cv.getContext("2d");let pen=false;
+function sizeSig(){const w=cv.parentElement.clientWidth;if(w&&cv.width!==w*2){cv.width=w*2;cv.height=320;cv.style.width="100%";cv.style.height="160px";cx.scale(2,2);cx.lineWidth=2.4;cx.lineCap="round";cx.lineJoin="round";cx.strokeStyle="#33432F";S.signed=false}}
+const pt=e=>{const r=cv.getBoundingClientRect();return[e.clientX-r.left,e.clientY-r.top]};
+cv.onpointerdown=e=>{pen=true;cv.setPointerCapture(e.pointerId);cx.beginPath();const p=pt(e);cx.moveTo(...p);cx.lineTo(p[0]+.1,p[1]);cx.stroke();S.signed=true;err()};
+cv.onpointermove=e=>{if(pen){cx.lineTo(...pt(e));cx.stroke()}};
+cv.onpointerup=cv.onpointercancel=()=>pen=false;
+$("sigClr").onclick=()=>{cx.clearRect(0,0,cv.width,cv.height);S.signed=false};
+
+async function img64(file){try{const bm=await createImageBitmap(file),k=Math.min(1,1600/Math.max(bm.width,bm.height)),c=document.createElement("canvas");c.width=Math.round(bm.width*k);c.height=Math.round(bm.height*k);c.getContext("2d").drawImage(bm,0,0,c.width,c.height);return c.toDataURL("image/jpeg",.82)}catch{return new Promise(r=>{const x=new FileReader();x.onload=()=>r(x.result);x.readAsDataURL(file)})}}
+/* Navigation */
+function go(n){
+ i=n;const id=ORDER[i];
+ document.querySelectorAll(".step").forEach(s=>s.hidden=true);
+ const el=$("s-"+id);el.hidden=false;el.style.animation="none";void el.offsetWidth;el.style.animation="";
+ $("prog").style.width=(i/(ORDER.length-2)*100)+"%";
+ $("bar").classList.toggle("hidden",id=="welcome"||id=="done");
+ $("back").style.visibility=i>1?"visible":"hidden";
+ $("nx").textContent=id=="pay"?"Submit booking":"Continue";
+ $("chipT").parentElement.style.visibility=i>ORDER.indexOf("room")?"visible":"hidden";
+ $("nx").disabled=false;clearInterval(tmr);
+ if(id=="room")loadAvail();if(id=="extras"){fillTimes();drawBf()}if(id=="agree")sizeSig();if(id=="pay")startHold();
+ refresh();window.scrollTo(0,0);
+}
+const clr=()=>document.querySelectorAll(".bad").forEach(x=>x.classList.remove("bad"));
+function err(t,fid){const m=$("s-"+ORDER[i]).querySelector(".msg");clr();if(m)m.textContent=t||"";if(t&&fid){$(fid).classList.add("bad");$(fid).focus({preventScroll:false})}return !t}
+const file=(id,l)=>{const f=$(id).files[0];return !f?`Upload ${l}.`:!f.type.startsWith("image/")?"That file isn't an image.":f.size>10*1048576?"Image is over 10 MB. Choose a smaller one.":""};
+const first=(...c)=>{for(const[t,f]of c)if(t)return err(t,f);return err()};
+const V={
+ stay(){const a=$("ci").value,b=$("co").value;return first([!a?"Choose a check-in date.":a<today?"Check-in can't be in the past.":"","ci"],[!b?"Choose a check-out date.":b<=a?"Check-out must be after check-in.":"","co"],[!S.kids?"":!$("kidAges").value.trim()?"Enter your children's ages.":($("kidAges").value.match(/\d+/g)||[]).some(a=>+a>7)?"Children 8 and above count as regular guests. Add them to the guest count instead.":"","kidAges"])},
+ extras(){return first([!$("arrive").value?"Choose your estimated arrival time.":"","arrive"])},
+ room(){return err(!S.rooms.length?"Select a room to continue.":cap()<S.pax?`Your rooms fit ${cap()} guests but you have ${S.pax}. Add another room.`:kcap()<S.kids?"Add a room that can fit your free children.":"")},
+ guest(){return first(
+  [isPH()?"":$("natN").value.trim().length<3?"Enter your nationality.":"","natN"],[isPH()?"":$("ppn").value.trim().length<5?"Enter your passport number.":"","ppn"],[isPH()?"":$("ppc").value.trim().length<2?"Enter the passport country of issue.":"","ppc"],
+  [$("name").value.trim().length<2?"Enter your full name.":"","name"],
+  [/^(\+?63|0)?9\d{9}$/.test($("phone").value.replace(/[\s\-()]/g,""))?"":"Enter a valid PH mobile number, e.g. 0917 123 4567.","phone"],
+  [/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($("email").value.trim())?"":"Enter a valid email address.","email"],
+  [!$("fb").value.trim()||/^(https?:\/\/)?((www|m)\.)?(facebook\.com|fb\.com|fb\.me|m\.me)\/\S+$|^@?[A-Za-z0-9.]{5,}$/i.test($("fb").value.trim())?"":"That doesn't look like a Messenger link or handle. Leave it blank to skip.","fb"])},
+ vehicle(){return S.veh===null?err("Tell us if you're bringing a vehicle."):!S.veh?err():first([!$("vtype").value?"Choose your vehicle type.":"","vtype"],[$("plate").value.trim().length<3?"Enter your plate number.":"","plate"])},
+ billing(){const sc=S.sbox?S.sen:[],bad=sc.findIndex(s=>s.name.trim().length<2||s.id.trim().length<3||!s.file),big=sc.findIndex(s=>s.file&&(!s.file.type.startsWith("image/")||s.file.size>10*1048576));
+ return first([sc.length>guests()?`You listed ${sc.length} cardholders but only ${guests()} guests are staying.`:"",""],[bad>=0?`Cardholder ${bad+1}: enter the name, ID number and upload the ID photo.`:"",""],[big>=0?`Cardholder ${big+1}: ID must be an image under 10 MB.`:"",""],
+  ...(S.or?[[$("co_name").value.trim().length<2?"Enter the company name.":"","co_name"],[$("co_addr").value.trim().length<5?"Enter the company address.":"","co_addr"],[/^\d{3}-?\d{3}-?\d{3}(-?\d{3,5})?$/.test($("tin").value.trim())?"":"Enter a valid TIN, e.g. 123-456-789-000.","tin"]]:[]))},
+ agree(){return first([file("gid","a photo of your government-issued ID"),"gid"],[!$("agree").checked?"Please agree to the house rules and penalties.":"","agree"],[!$("policy").checked?"Please acknowledge the no-refund and reschedule policy.":"","policy"],[!$("privacy").checked?"Please consent to the privacy notice to continue.":"","privacy"],[!S.signed?"Please sign in the box to confirm your agreement.":"",""])},
+ pay(){return first([file("rcpt","your proof of payment"),"rcpt"])}
+};
+function next(){const id=ORDER[i];if(V[id]&&!V[id]())return;if(id=="pay")return submit();go(i+1)}
+$("nx").onclick=next;$("back").onclick=()=>go(i-1);
+document.addEventListener("keydown",e=>{
+ if(e.key!="Enter"||["BUTTON","TEXTAREA"].includes(e.target.tagName)||ORDER[i]=="done")return;
+ if(e.target.id=="cp")return;
+ e.preventDefault();
+ const f=[...$("s-"+ORDER[i]).querySelectorAll("input:not([type=checkbox]):not([type=file]):not([type=date]):not(#cp),select")].filter(x=>x.offsetParent);
+ const k=f.indexOf(e.target);k>=0&&k<f.length-1?f[k+1].focus():next();
+});
+
+/* Inputs */
+$("ci").onchange=()=>{const c=$("ci").value;if(c){$("co").min=plus(c,1);if(!$("co").value||$("co").value<=c)$("co").value=plus(c,1)}err();refresh()};
+$("co").onchange=()=>{err();refresh()};
+const setPax=d=>{S.pax+=d;refresh()};
+$("km").onclick=()=>{S.kids--;refresh()};$("kp").onclick=()=>{S.kids++;refresh()};
+$("pvLink").onclick=e=>{e.preventDefault();$("pvText").hidden=!$("pvText").hidden};
+$("nat").onchange=()=>{$("ppBox").hidden=isPH();err()};
+$("pm").onclick=()=>setPax(-1);$("pp").onclick=()=>setPax(1);
+$("am").onclick=()=>{S.addPax--;refresh()};$("ap").onclick=()=>{S.addPax++;refresh()};
+$("early").onchange=e=>{S.early=+e.target.value;refresh()};$("late").onchange=e=>{S.late=+e.target.value;refresh()};
+$("or").onchange=e=>{S.or=e.target.checked;refresh()};
+$("valet").onchange=e=>{S.valet=e.target.checked;refresh()};
+$("plate").oninput=e=>e.target.value=e.target.value.toUpperCase();
+document.querySelectorAll("[data-k]").forEach(g=>g.querySelectorAll("button").forEach(b=>b.onclick=()=>{
+ const v=b.dataset.v=="1";S[g.dataset.k]=v;g.querySelectorAll("button").forEach(x=>x.classList.toggle("sel",x===b));
+ if(g.dataset.k=="veh")$("vBox").hidden=!v;if(g.dataset.k=="park"&&!v){S.valet=false;$("valet").checked=false}err();refresh()}));
+document.querySelectorAll("input,select").forEach(e=>e.addEventListener("input",()=>{if(e.classList.contains("bad"))err()}));
+
+/* Senior / PWD cardholders (one row each, no fixed limit other than guests staying) */
+let uid=0;
+const senRow=s=>`<div class="card p-4" data-u="${s.u}"><div class="flex justify-between items-center"><b class="sn"></b><button type="button" class="underline text-sm text-sage-700 senRm">Remove</button></div><label class="lb">Full name (as on ID)<input class="dt senF" data-f="name"></label><label class="lb">Senior / PWD ID number<input class="dt senF" data-f="id"></label><label class="lb">Photo of ID<input type="file" accept="image/*" class="senFile mt-2 block w-full font-normal"></label></div>`;
+const sOf=el=>S.sen.find(x=>x.u==el.closest("[data-u]").dataset.u);
+const addSen=()=>{const s={u:++uid,name:"",id:"",file:null};S.sen.push(s);$("senList").insertAdjacentHTML("beforeend",senRow(s));refresh()};
+$("sbox").onchange=e=>{S.sbox=e.target.checked;if(S.sbox&&!S.sen.length)addSen();err();refresh()};
+$("senAdd").onclick=addSen;
+$("senList").addEventListener("click",e=>{const b=e.target.closest(".senRm");if(!b)return;S.sen=S.sen.filter(x=>x!==sOf(b));b.closest("[data-u]").remove();if(!S.sen.length){S.sbox=false;$("sbox").checked=false}err();refresh()});
+$("senList").addEventListener("input",e=>{if(e.target.classList.contains("senF"))sOf(e.target)[e.target.dataset.f]=e.target.value});
+$("senList").addEventListener("change",e=>{if(e.target.classList.contains("senFile"))sOf(e.target).file=e.target.files[0]||null});
+/* Coupon */
+const cpm=(t,bad)=>{$("cpMsg").textContent=t;$("cpMsg").style.color=bad?"#B4533F":"#445840"};
+async function applyCoupon(){
+ const code=$("cp").value.trim().toUpperCase();if(!code)return cpm("Enter a code first.",1);
+ let c=null;
+ try{if(COUPON_URL){const j=await(await fetch(COUPON_URL+"?action=coupon&code="+encodeURIComponent(code))).json();if(j.valid)c={code,type:j.type,value:j.value}}else if(COUPONS[code])c={code,...COUPONS[code]}}
+ catch{return cpm("Couldn't check the code. Try again.",1)}
+ if(!c){S.coupon=null;refresh();return cpm("That code isn't valid or has expired.",1)}
+ S.coupon=c;refresh();cpm(`Code ${code} applied. You save ${peso(calc().disc)}.`);
+}
+$("cpGo").onclick=applyCoupon;
+$("cp").addEventListener("keydown",e=>{if(e.key=="Enter"){e.preventDefault();applyCoupon()}});
+
+/* Room hold: 10 minutes to pay, then the room is released */
+let tmr=null,holdEnd=0,expired=false;
+async function startHold(){
+ clearInterval(tmr);expired=false;$("nx").disabled=true;$("holdBar").textContent="Reserving your room…";
+ S.ref=S.ref||"LUN-"+Date.now().toString(36).toUpperCase().slice(-6);
+ if(HOLD_URL){try{const r=await fetch(HOLD_URL,{method:"POST",body:JSON.stringify({action:"hold",ref:S.ref,room_ids:S.rooms.map(x=>x.id),checkin:$("ci").value,checkout:$("co").value})});const j=await r.json();if(!r.ok||j.ok===false)throw 0}
+  catch{go(ORDER.indexOf("room"));err("Sorry, that room was just taken. Please choose another.");return}}
+ holdEnd=Date.now()+HOLD_MIN*6e4;$("nx").disabled=false;tick();tmr=setInterval(tick,1000);
+}
+function tick(){
+ const left=holdEnd-Date.now();
+ if(left<=0){clearInterval(tmr);expired=true;$("nx").disabled=true;$("holdBar").innerHTML="Time's up. Your room hold was released. <button type='button' class='underline font-semibold' onclick='restart()'>Start over</button>";return}
+ $("holdBar").innerHTML=`Room held for <b>${Math.floor(left/6e4)}:${String(Math.floor(left%6e4/1000)).padStart(2,"0")}</b>. Pay and upload your proof before time runs out, or the room is released.`;
+}
+const restart=()=>{S.ref=null;go(ORDER.indexOf("stay"))};
+const HELP=`<p class="font-semibold">Need help? Message us</p><p class="text-sm text-slate/70 mt-1">Open daily 7:00 AM – 11:00 PM. We reply within 10 minutes during business hours.</p><div class="flex flex-wrap gap-2 mt-3 text-sm font-semibold"><a class="sg" style="padding:8px 14px" href="https://facebook.com/lunanbyski" target="_blank" rel="noopener">Messenger</a><a class="sg" style="padding:8px 14px" href="https://wa.me/639063620398" target="_blank" rel="noopener">WhatsApp</a><a class="sg" style="padding:8px 14px" href="viber://chat?number=%2B639063620398">Viber</a><a class="sg" style="padding:8px 14px" href="tel:09063620398">Call / text</a><a class="sg" style="padding:8px 14px" href="mailto:lunanbyski@gmail.com">Email</a></div>`;
+document.querySelectorAll(".help-box").forEach(e=>e.innerHTML=HELP);
+
+/* Confirmation template: send from your SERVER only after payment is verified.
+   Never put door codes in this front-end file. */
+const confirmationEmail=b=>`Hi ${b.name}, your payment is verified and your stay at Lunan is confirmed!
+
+Booking ${b.ref}: ${b.room}, ${b.checkin} to ${b.checkout}
+Check-in 2:00 PM · Check-out 10:00 AM
+
+DIRECTIONS
+26 Roma St. Brgy. Muzon, San Francisco Vill Gate 2, Taytay, Rizal
+
+PARKING
+1 complimentary car space per room, nose-in parking. Motorcycles are not counted in the one-car limit.${b.valet?"\nValet parking requested: we'll confirm with you.":""}
+
+YOUR DIGITAL DOOR CODE
+{{DOOR_CODE}}
+
+Reminder: stairs only (no elevator). Quiet hours 10 PM – 8 AM. No visitors 8 PM – 10 AM.
+
+Questions? facebook.com/lunanbyski · 0906 362 0398 · lunanbyski@gmail.com (7 AM – 11 PM daily)`;
+
+async function submit(){
+ if($("hp").value){go(ORDER.indexOf("done"));return}
+ if(expired)return;
+ const c=calc(),b=$("nx");b.disabled=true;
+ const ref=S.ref||"LUN-"+Date.now().toString(36).toUpperCase().slice(-6),v=S.veh;
+ const rec={ref,status:"pending_verification",codes_released:false,checkin:$("ci").value,checkout:$("co").value,nights:c.nights,pax:S.pax,room_ids:S.rooms.map(x=>x.id).join(","),room:S.rooms.map(x=>x.name).join(", "),room_count:S.rooms.length,
+  breakfast:JSON.stringify(S.bf),breakfast_people:c.bfQty,additional_pax:S.addPax,floor_preference:S.rooms.some(x=>x.pick)?$("floorPref").value:"",early_checkin_hrs:S.early,late_checkout_hrs:S.late,
+  name:$("name").value.trim(),phone:$("phone").value.trim(),email:$("email").value.trim(),messenger:$("fb").value.trim(),
+  vehicle:v,vehicle_type:v?$("vtype").value:"",plate:v?$("plate").value.trim():"",needs_parking:v&&S.park,valet:v&&S.park&&S.valet,
+  coupon:S.coupon?S.coupon.code:"",official_receipt:S.or,company:S.or?$("co_name").value.trim():"",company_address:S.or?$("co_addr").value.trim():"",tin:S.or?$("tin").value.trim():"",
+  subtotal:c.sub,discount:c.disc,vat:c.vat,total:c.total,same_day:c.same,amount_due_now:c.due,balance:c.bal,rules_accepted:true,privacy_consent:true,refund_policy_ack:true,arrival_time:$("arrive").value,special_requests:$("notes").value.trim(),nationality:isPH()?"Filipino":$("natN").value.trim(),passport_no:isPH()?"":$("ppn").value.trim(),passport_country:isPH()?"":$("ppc").value.trim(),senior_pwd_count:c.nS,senior_pwd:JSON.stringify(S.sbox?S.sen.map(s=>({name:s.name.trim(),id_number:s.id.trim()})):[]),senior_pwd_share_each:c.nS?c.sShare/c.nS:0,senior_pwd_discount:c.sd,free_children:S.kids,child_ages:S.kids?$("kidAges").value.trim():""};
+ const files={gov_id:await img64($("gid").files[0]),payment_proof:await img64($("rcpt").files[0]),signature:cv.toDataURL("image/png"),senior:S.sbox?await Promise.all(S.sen.map(s=>img64(s.file))):[]};
+ try{
+  if(BOOKING_ENDPOINT){const r=await fetch(BOOKING_ENDPOINT,{method:"POST",body:JSON.stringify({action:"book",rec,files})});const j=await r.json();if(!j.ok)throw j.error||0}
+  clearInterval(tmr);$("dn").textContent=rec.name.split(" ")[0];$("ref").textContent=ref;go(ORDER.indexOf("done"));$("prog").style.width="100%";
+ }catch(x){err(typeof x=="string"?x:"We couldn't send your booking. Check your connection and try again.")}
+ b.disabled=false;
+}
+go(0);
+</script>
+</body>
+</html>
