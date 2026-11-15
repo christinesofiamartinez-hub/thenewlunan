@@ -115,12 +115,21 @@ input[type=file]::file-selector-button{background:#566E50;color:#fff;border:0;bo
 
 <section class="step" id="s-guest" hidden>
   <h2 class="q">Who's the reservation for?</h2>
+  <label class="card flex gap-4 items-center p-4 mt-3 cursor-pointer"><input type="checkbox" id="ret" class="chk"><span><b>I've stayed at LUNAN before</b><br><span class="text-sm text-slate/70">Skip the form. Just enter your name and we'll find your details.</span></span></label>
+  <div id="retBox" hidden>
+    <label class="lb">Full name <span class="font-normal text-slate/60">(as in your previous booking)</span><input id="rname" class="dt" autocomplete="name" placeholder="Juan Dela Cruz"></label>
+    <label class="lb">Last 4 digits of the mobile number you used<input id="rlast" class="dt" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="4567"></label>
+    <button type="button" class="btn" id="retGo" style="padding:12px 20px;margin-top:10px">Find my details</button>
+    <p id="retMsg" class="mt-2 text-[15px] font-semibold min-h-[22px]" aria-live="polite"></p>
+  </div>
+  <div id="newBox">
   <label class="lb">Full name<input id="name" class="dt" autocomplete="name" placeholder="Juan Dela Cruz"></label>
   <label class="lb">Contact number (mobile or Viber)<input id="phone" type="tel" inputmode="tel" class="dt" autocomplete="tel" placeholder="0917 123 4567"></label>
   <label class="lb">Email address<input id="email" type="email" class="dt" autocomplete="email" placeholder="you@email.com"></label>
   <label class="lb">Nationality<select id="nat" class="dt"><option value="ph">Filipino</option><option value="x">Foreign national</option></select></label>
   <div id="ppBox" hidden><label class="lb">Nationality (country)<input id="natN" class="dt"></label><label class="lb">Passport number<input id="ppn" class="dt uppercase"></label><label class="lb">Passport country of issue<input id="ppc" class="dt"></label></div>
   <p class="hint mt-2 text-sm">Required by law: lodging establishments must keep a guest register.</p>
+  </div>
   <label class="lb">Facebook Messenger link or handle <span class="font-normal text-slate/60">(optional)</span><input id="fb" class="dt" placeholder="m.me/yourname or @yourname"></label>
   <p class="hint mt-2">Optional. Share it to receive your door code on Messenger. Otherwise we'll send it to your email and mobile.</p>
   <label class="lb">Special requests <span class="font-normal text-slate/60">(optional)</span><textarea id="notes" rows="3" class="dt" placeholder="Celebrations, accessibility needs, anything we should know"></textarea></label>
@@ -164,8 +173,10 @@ input[type=file]::file-selector-button{background:#566E50;color:#fff;border:0;bo
 
 <section class="step" id="s-agree" hidden>
   <h2 class="q">ID &amp; house rules</h2>
+  <div id="idBox">
   <label class="lb">Government-issued ID<input type="file" id="gid" accept="image/*" class="mt-2 block w-full font-normal"></label>
   <p class="hint mt-1 text-sm">A clear photo of a valid ID. We verify you before sending your door code. Stored securely, never shared publicly, and deleted after the legal retention period.</p>
+  </div>
   <ul class="mt-5 space-y-2 text-[15px]">
     <li class="card p-3"><b>No smoking</b> inside rooms and enclosed areas. Indoor smoking is illegal under Executive Order No. 26 (nationwide smoking ban). Violations are charged a ₱3,000 penalty, including deep cleaning.</li>
     <li class="card p-3"><b>No pets</b> allowed: ₱3,000 penalty</li>
@@ -179,8 +190,10 @@ input[type=file]::file-selector-button{background:#566E50;color:#fff;border:0;bo
   <label class="flex gap-3 items-start mt-4 cursor-pointer"><input type="checkbox" id="policy" class="chk"><span class="leading-relaxed">I understand my booking is non-refundable and can only be rescheduled at least 7 days before check-in (no fee), and that no-shows are non-refundable.</span></label>
   <label class="flex gap-3 items-start mt-4 cursor-pointer"><input type="checkbox" id="privacy" class="chk"><span class="leading-relaxed">I consent to Lunan collecting and using my personal data, ID and signature to process my booking, as described in the <a href="#" id="pvLink" class="underline">privacy notice</a>.</span></label>
   <div id="pvText" hidden class="text-sm leading-relaxed bg-sage-50 rounded-2xl p-4 mt-2"><b>Privacy notice.</b> Lunan collects your name, contact details, home address, nationality, ID photo and number, passport details (foreign guests), signature, vehicle details, payment proof, and Senior/PWD ID details if you claim that discount. We use them to verify and process your booking, apply statutory discounts, keep the guest register required by local government and DOT rules, run self check-in, and keep security and tax records. Your IDs and proofs are stored securely, are never shared publicly, and are seen only by staff who need them. ID photos are deleted after the legal retention period (generally 1–2 years for tax and audit purposes). Under the Data Privacy Act of 2012 (RA 10173) you may ask to access, correct or delete your data by emailing lunanbyski@gmail.com, or complain to the National Privacy Commission.</div>
+  <div id="sigBox">
   <div class="flex justify-between items-center mt-5"><p class="font-semibold">Sign here</p><button type="button" id="sigClr" class="underline text-sm text-sage-700">Clear</button></div>
-  <canvas id="sig" class="mt-2" aria-label="Signature pad"></canvas><p class="msg"></p>
+  <canvas id="sig" class="mt-2" aria-label="Signature pad"></canvas>
+  </div><p class="msg"></p>
 </section>
 
 <section class="step" id="s-pay" hidden>
@@ -229,7 +242,7 @@ input[type=file]::file-selector-button{background:#566E50;color:#fff;border:0;bo
 
 <script>
 /* ===== CONFIG ===== */
-const API="https://script.google.com/macros/s/AKfycbyJVMXDqpgGLgW001GaLEWLa69LxyWsdBVKY9B84DdACWHs_1PyOtGu37V2ptXgF0fN/exec";   // paste your Apps Script Web App URL here (ends in /exec). Handles availability, holds, coupons and bookings.
+const API="https://script.google.com/macros/s/AKfycbx-gqyejupcIWD8pcTFiHXDyFcjABYruPNfSqLX2RllgOA_DuULQlSp-TNepJTmOzgV/exec";   // paste your Apps Script Web App URL here (ends in /exec). Handles availability, holds, coupons and bookings.
 const BOOKING_ENDPOINT=API,AVAIL_URL=API,HOLD_URL=API,COUPON_URL=API;
 const COUPONS={/* "LUNAN10":{type:"percent",value:10} */};
 const PHOTOS_URL="",VIDEO_URL="",QR_URL="img/pq.jpg";
@@ -437,7 +450,7 @@ function go(n){
  $("nx").textContent=id=="pay"?"Submit booking":"Continue";
  $("chipT").parentElement.style.visibility=i>ORDER.indexOf("room")?"visible":"hidden";
  $("nx").disabled=false;clearInterval(tmr);
- if(id=="room")loadAvail();if(id=="extras"){fillTimes();drawBf()}if(id=="agree")sizeSig();if(id=="pay")startHold();
+ if(id=="room")loadAvail();if(id=="extras"){fillTimes();drawBf()}if(id=="agree"){$("idBox").hidden=!!S.retOk;$("sigBox").hidden=!!S.retOk;sizeSig()}if(id=="pay")startHold();
  refresh();window.scrollTo(0,0);
 }
 const clr=()=>document.querySelectorAll(".bad").forEach(x=>x.classList.remove("bad"));
@@ -448,17 +461,17 @@ const V={
  stay(){const a=$("ci").value,b=$("co").value;return first([!a?"Choose a check-in date.":a<today?"Check-in can't be in the past.":"","ci"],[!b?"Choose a check-out date.":b<=a?"Check-out must be after check-in.":"","co"],[!S.kids?"":!$("kidAges").value.trim()?"Enter your children's ages.":($("kidAges").value.match(/\d+/g)||[]).some(a=>+a>7)?"Children 8 and above count as regular guests. Add them to the guest count instead.":"","kidAges"])},
  extras(){return first([!$("arrive").value?"Choose your estimated arrival time.":"","arrive"])},
  room(){return err(!S.rooms.length?"Select a room to continue.":cap()<S.pax?`Your rooms fit ${cap()} guests but you have ${S.pax}. Add another room.`:kcap()<S.kids?"Add a room that can fit your free children.":"")},
- guest(){return first(
-  [isPH()?"":$("natN").value.trim().length<3?"Enter your nationality.":"","natN"],[isPH()?"":$("ppn").value.trim().length<5?"Enter your passport number.":"","ppn"],[isPH()?"":$("ppc").value.trim().length<2?"Enter the passport country of issue.":"","ppc"],
-  [$("name").value.trim().length<2?"Enter your full name.":"","name"],
-  [/^(\+?63|0)?9\d{9}$/.test($("phone").value.replace(/[\s\-()]/g,""))?"":"Enter a valid PH mobile number, e.g. 0917 123 4567.","phone"],
-  [/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($("email").value.trim())?"":"Enter a valid email address.","email"],
+ guest(){const R=$("ret").checked&&S.retOk;if($("ret").checked&&!S.retOk)return err("Tap \u201cFind my details\u201d so we can look up your previous stay.","rname");return first(
+  [R||isPH()?"":$("natN").value.trim().length<3?"Enter your nationality.":"","natN"],[R||isPH()?"":$("ppn").value.trim().length<5?"Enter your passport number.":"","ppn"],[R||isPH()?"":$("ppc").value.trim().length<2?"Enter the passport country of issue.":"","ppc"],
+  [R?"":$("name").value.trim().length<2?"Enter your full name.":"","name"],
+  [R||/^(\+?63|0)?9\d{9}$/.test($("phone").value.replace(/[\s\-()]/g,""))?"":"Enter a valid PH mobile number, e.g. 0917 123 4567.","phone"],
+  [R||/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test($("email").value.trim())?"":"Enter a valid email address.","email"],
   [!$("fb").value.trim()||/^(https?:\/\/)?((www|m)\.)?(facebook\.com|fb\.com|fb\.me|m\.me)\/\S+$|^@?[A-Za-z0-9.]{5,}$/i.test($("fb").value.trim())?"":"That doesn't look like a Messenger link or handle. Leave it blank to skip.","fb"])},
  vehicle(){return S.veh===null?err("Tell us if you're bringing a vehicle."):!S.veh?err():first([!$("vtype").value?"Choose your vehicle type.":"","vtype"],[$("plate").value.trim().length<3?"Enter your plate number.":"","plate"])},
  billing(){const sc=S.sbox?S.sen:[],bad=sc.findIndex(s=>s.name.trim().length<2||s.id.trim().length<3||!s.file),big=sc.findIndex(s=>s.file&&(!s.file.type.startsWith("image/")||s.file.size>10*1048576));
  return first([sc.length>guests()?`You listed ${sc.length} cardholders but only ${guests()} guests are staying.`:"",""],[bad>=0?`Cardholder ${bad+1}: enter the name, ID number and upload the ID photo.`:"",""],[big>=0?`Cardholder ${big+1}: ID must be an image under 10 MB.`:"",""],
   ...(S.or?[[$("co_name").value.trim().length<2?"Enter the company name.":"","co_name"],[$("co_addr").value.trim().length<5?"Enter the company address.":"","co_addr"],[/^\d{3}-?\d{3}-?\d{3}(-?\d{3,5})?$/.test($("tin").value.trim())?"":"Enter a valid TIN, e.g. 123-456-789-000.","tin"]]:[]))},
- agree(){return first([file("gid","a photo of your government-issued ID"),"gid"],[!$("agree").checked?"Please agree to the house rules and penalties.":"","agree"],[!$("policy").checked?"Please acknowledge the no-refund and reschedule policy.":"","policy"],[!$("privacy").checked?"Please consent to the privacy notice to continue.":"","privacy"],[!S.signed?"Please sign in the box to confirm your agreement.":"",""])},
+ agree(){return first([S.retOk?"":file("gid","a photo of your government-issued ID"),"gid"],[!$("agree").checked?"Please agree to the house rules and penalties.":"","agree"],[!$("policy").checked?"Please acknowledge the no-refund and reschedule policy.":"","policy"],[!$("privacy").checked?"Please consent to the privacy notice to continue.":"","privacy"],[S.retOk||S.signed?"":"Please sign in the box to confirm your agreement.",""])},
  pay(){return first([file("rcpt","your proof of payment"),"rcpt"])}
 };
 function next(){const id=ORDER[i];if(V[id]&&!V[id]())return;if(id=="pay")return submit();go(i+1)}
@@ -550,6 +563,29 @@ Reminder: stairs only (no elevator). Quiet hours 10 PM – 8 AM. No visitors 8 P
 
 Questions? facebook.com/lunanbyski · 0906 362 0398 · lunanbyski@gmail.com (7 AM – 11 PM daily)`;
 
+/* ---- returning guest: name lookup ---- */
+S.retOk=false;
+const retReset=()=>{S.retOk=false;$("retMsg").textContent=""};
+let retBusy=false;
+async function findGuest(){
+ const n=$("rname").value.trim();
+ const l4=$("rlast").value.trim();
+ if(n.length<2)return err("Enter your full name.","rname");
+ if(!/^\d{4}$/.test(l4))return err("Enter the last 4 digits of the mobile number you used before.","rlast");
+ if(retBusy)return;retBusy=true;$("retGo").disabled=true;$("retMsg").textContent="Checking\u2026";
+ try{
+  const r=await(await fetch(`${API}?action=returning&name=${encodeURIComponent(n)}&last4=${l4}`)).json();
+  if(r&&r.found){S.retOk=true;$("retMsg").textContent="Welcome back, "+r.first+"! We have your details on file, so no ID upload or signature needed.";err()}
+  else{S.retOk=false;$("name").value=n;$("ret").checked=false;$("retBox").hidden=true;$("newBox").hidden=false;$("retMsg").textContent="";
+   err("We couldn't find a previous stay with that name and number, so please fill in your details below.")}
+ }catch(e){$("retMsg").textContent="";err("We couldn't check right now. Please try again.")}
+ retBusy=false;$("retGo").disabled=false;
+}
+$("ret").onchange=()=>{retReset();const on=$("ret").checked;$("retBox").hidden=!on;$("newBox").hidden=on;if(on)$("rname").focus()};
+$("rname").oninput=retReset;$("rlast").oninput=()=>{$("rlast").value=$("rlast").value.replace(/\D/g,"");retReset()};
+$("retGo").onclick=findGuest;
+["rname","rlast"].forEach(id=>$(id).addEventListener("keydown",e=>{if(e.key=="Enter"){e.preventDefault();e.stopPropagation();findGuest()}}));
+
 async function submit(){
  if($("hp").value){go(ORDER.indexOf("done"));return}
  if(expired)return;
@@ -557,11 +593,11 @@ async function submit(){
  const ref=S.ref||"LUN-"+Date.now().toString(36).toUpperCase().slice(-6),v=S.veh;
  const rec={ref,status:"pending_verification",codes_released:false,checkin:$("ci").value,checkout:$("co").value,nights:c.nights,pax:S.pax,room_ids:S.rooms.map(x=>x.id).join(","),room:S.rooms.map(x=>x.name).join(", "),room_count:S.rooms.length,
   breakfast:JSON.stringify(S.bf),breakfast_people:c.bfQty,additional_pax:S.addPax,floor_preference:S.rooms.some(x=>x.pick)?$("floorPref").value:"",early_checkin_hrs:S.early,late_checkout_hrs:S.late,
-  name:$("name").value.trim(),phone:$("phone").value.trim(),email:$("email").value.trim(),messenger:$("fb").value.trim(),
+  returning:!!S.retOk,returning_last4:S.retOk?$("rlast").value.trim():"",name:(S.retOk?$("rname"):$("name")).value.trim(),phone:S.retOk?"":$("phone").value.trim(),email:S.retOk?"":$("email").value.trim(),messenger:$("fb").value.trim(),
   vehicle:v,vehicle_type:v?$("vtype").value:"",plate:v?$("plate").value.trim():"",needs_parking:v&&S.park,valet:v&&S.park&&S.valet,
   coupon:S.coupon?S.coupon.code:"",official_receipt:S.or,company:S.or?$("co_name").value.trim():"",company_address:S.or?$("co_addr").value.trim():"",tin:S.or?$("tin").value.trim():"",
-  subtotal:c.sub,discount:c.disc,vat:c.vat,total:c.total,same_day:c.same,amount_due_now:c.due,balance:c.bal,rules_accepted:true,privacy_consent:true,refund_policy_ack:true,arrival_time:$("arrive").value,special_requests:$("notes").value.trim(),nationality:isPH()?"Filipino":$("natN").value.trim(),passport_no:isPH()?"":$("ppn").value.trim(),passport_country:isPH()?"":$("ppc").value.trim(),senior_pwd_count:c.nS,senior_pwd:JSON.stringify(S.sbox?S.sen.map(s=>({name:s.name.trim(),id_number:s.id.trim()})):[]),senior_pwd_share_each:c.nS?c.sShare/c.nS:0,senior_pwd_discount:c.sd,free_children:S.kids,child_ages:S.kids?$("kidAges").value.trim():""};
- const files={gov_id:await img64($("gid").files[0]),payment_proof:await img64($("rcpt").files[0]),signature:cv.toDataURL("image/png"),senior:S.sbox?await Promise.all(S.sen.map(s=>img64(s.file))):[]};
+  subtotal:c.sub,discount:c.disc,vat:c.vat,total:c.total,same_day:c.same,amount_due_now:c.due,balance:c.bal,rules_accepted:true,privacy_consent:true,refund_policy_ack:true,arrival_time:$("arrive").value,special_requests:$("notes").value.trim(),nationality:S.retOk?"":isPH()?"Filipino":$("natN").value.trim(),passport_no:S.retOk||isPH()?"":$("ppn").value.trim(),passport_country:S.retOk||isPH()?"":$("ppc").value.trim(),senior_pwd_count:c.nS,senior_pwd:JSON.stringify(S.sbox?S.sen.map(s=>({name:s.name.trim(),id_number:s.id.trim()})):[]),senior_pwd_share_each:c.nS?c.sShare/c.nS:0,senior_pwd_discount:c.sd,free_children:S.kids,child_ages:S.kids?$("kidAges").value.trim():""};
+ const files={gov_id:S.retOk?"":await img64($("gid").files[0]),payment_proof:await img64($("rcpt").files[0]),signature:S.retOk?"":cv.toDataURL("image/png"),senior:S.sbox?await Promise.all(S.sen.map(s=>img64(s.file))):[]};
  try{
   if(BOOKING_ENDPOINT){const r=await fetch(BOOKING_ENDPOINT,{method:"POST",body:JSON.stringify({action:"book",rec,files})});const j=await r.json();if(!j.ok)throw j.error||0}
   clearInterval(tmr);$("dn").textContent=rec.name.split(" ")[0];$("ref").textContent=ref;go(ORDER.indexOf("done"));$("prog").style.width="100%";
